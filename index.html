@@ -4,27 +4,983 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlavorVerse</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>FlavorVerse | Premium Culinary Journey</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Audiowide&family=Orbitron:wght@400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+        <style>
+            /* ==========================================================================
+   FlavorVerse Stylesheet - Responsive Premium Redesign
+   ========================================================================== */
+
+/* Design Tokens & Custom Properties */
+:root {
+    --primary: #E63946;             /* Crimson / Coral Accent */
+    --primary-light: #FF8787;       /* Soft light red tint */
+    --primary-hover: #D6222F;       /* Hover state primary */
+    --dark: #1D3557;                /* Dark Slate / Navy Blue */
+    --dark-hover: #15263F;          /* Hover state dark */
+    --accent: #457B9D;              /* Steel Blue Accent */
+    --body-bg: #F8F9FA;             /* Soft off-white body background */
+    --card-bg: #FFFFFF;
+    --text-dark: #2B2D42;
+    --text-muted: #6C757D;
+    --white: #FFFFFF;
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --footer-bg: #0F172A;
+    --footer-text: #94A3B8;
+
+    --font-heading: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-body: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    --border-radius: 12px;
+    --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    --box-shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Global Reset & Base */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--body-bg);
+    color: var(--text-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+}
+
+a {
+    transition: var(--transition);
+}
+
+/* ==========================================================================
+   Navbar Components
+   ========================================================================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+    transition: var(--transition);
+}
+
+.navbar.scrolled {
+    background: var(--white);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.25rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-family: 'Orbitron', var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--dark);
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.nav-logo span {
+    color: var(--primary);
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 2.2rem;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: var(--dark);
+    text-decoration: none;
+    font-size: 1rem;
+    position: relative;
+    padding: 0.3rem 0;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary);
+    transition: var(--transition);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--primary);
+}
+
+.nav-cta-item {
+    margin-left: 0.5rem;
+}
+
+.nav-cta {
+    display: inline-block;
+    background-color: var(--primary);
+    color: var(--white) !important;
+    padding: 0.6rem 1.4rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid var(--primary);
+}
+
+.nav-cta:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+}
+
+/* Nav Mobile Toggle Drawer */
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1010;
+}
+
+.hamburger {
+    display: block;
+    width: 26px;
+    height: 3px;
+    background: var(--dark);
+    position: relative;
+    transition: var(--transition);
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    width: 26px;
+    height: 3px;
+    background: var(--dark);
+    transition: var(--transition);
+}
+
+.hamburger::before {
+    top: -8px;
+}
+
+.hamburger::after {
+    bottom: -8px;
+}
+
+.nav-toggle.active .hamburger {
+    background: transparent;
+}
+
+.nav-toggle.active .hamburger::before {
+    transform: rotate(45deg);
+    top: 0;
+}
+
+.nav-toggle.active .hamburger::after {
+    transform: rotate(-45deg);
+    bottom: 0;
+}
+
+/* ==========================================================================
+   Hero Section Styling
+   ========================================================================== */
+.hero-section {
+    position: relative;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.65)), url(image/bg-2.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 8rem 1.5rem 5rem;
+}
+
+.hero-text {
+    font-size: clamp(2.2rem, 5.5vw, 4.2rem);
+    color: var(--white);
+    line-height: 1.25;
+    max-width: 900px;
+    margin-bottom: 1.5rem;
+    font-weight: 800;
+}
+
+.hero-second-text {
+    color: var(--primary);
+    background: linear-gradient(135deg, #FF6B6B, #FFA048);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-para {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    max-width: 750px;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+}
+
+.para-1 {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: #F1FAEE;
+    font-family: 'Audiowide', cursive;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+}
+
+.btn-container {
+    display: flex;
+    gap: 1.2rem;
+    margin-bottom: 3.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn {
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: var(--white);
+    box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(230, 57, 70, 0.5);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+}
+
+.btn-secondary:hover {
+    background-color: var(--white);
+    color: var(--dark);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+}
+
+/* Hero Stats Container */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 130px);
+    gap: 25px;
+    justify-content: center;
+    width: 100%;
+    max-width: 650px;
+}
+
+.grid-item {
+    color: var(--primary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 5px solid var(--primary);
+    border-right: 5px solid var(--primary);
+    border-radius: var(--border-radius);
+    padding: 1.2rem 0.5rem;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    transition: var(--transition);
+}
+
+.grid-item p:first-child {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.grid-item p:last-child {
+    color: var(--dark);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.grid-item:hover {
+    transform: translateY(-8px);
+    background-color: var(--white);
+    box-shadow: 0 12px 35px rgba(230, 57, 70, 0.25);
+}
+
+/* ==========================================================================
+   About Section Styling
+   ========================================================================== */
+#about {
+    padding: 7rem 2rem;
+    background-color: var(--white);
+}
+
+.grid-about-container {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 4.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.flavor-img {
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-hover);
+}
+
+.container-2 {
+    background-color: transparent;
+    padding: 0;
+}
+
+.about-heading {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    margin-bottom: 2rem;
+    color: var(--dark);
+    line-height: 1.2;
+}
+
+.about-para {
+    line-height: 1.75;
+    color: var(--text-dark);
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+}
+
+.about-para:last-child {
+    margin-bottom: 0;
+}
+
+/* ==========================================================================
+   Services Section Styling
+   ========================================================================== */
+.service-bg {
+    position: relative;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url(image/bg-1.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 7rem 2rem;
+}
+
+.service-grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 3rem;
+    align-items: center;
+}
+
+.service-1, .service-3 {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--white);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    border-radius: var(--border-radius);
+    padding: 3rem 2.2rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.service-1:hover, .service-3:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.service-2 {
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    /* box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4); */
+    transition: var(--transition);
+}
+
+.service-2:hover {
+    transform: scale(1.02);
+}
+
+.service-heading {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    color: var(--primary-light);
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, #FFFFFF, #FF8787);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.service-para {
+    line-height: 1.8;
+    font-size: 1rem;
+    text-align: center;
+    opacity: 0.95;
+}
+
+/* ==========================================================================
+   Menu Cards Section Styling
+   ========================================================================== */
+#menu {
+    padding: 7rem 2rem;
+    background-color: var(--body-bg);
+}
+
+.menu-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 4.5rem;
+}
+
+.menu-heading {
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--dark);
+    margin-bottom: 1rem;
+}
+
+.menu-para {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--text-muted);
+}
+
+.menu-parent {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.menu-child {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    position: relative;
+}
+
+.menu-child:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--box-shadow-hover);
+    cursor: pointer;
+}
+
+.menu-image-container {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+}
+
+.menu-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.menu-child:hover .menu-image-container img {
+    transform: scale(1.08);
+}
+
+.menu-category-tag {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: var(--dark);
+    color: var(--white);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.35rem 0.8rem;
+    border-radius: 20px;
+    z-index: 10;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.menu-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.menu-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.6rem;
+}
+
+.menu-rating {
+    color: #FFB01F;
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.menu-price {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.menu-content h3 {
+    font-size: 1.35rem;
+    color: var(--dark);
+    margin-bottom: 0.6rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.menu-content p {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.menu-footer {
+    margin-top: auto;
+}
+
+.menu-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary), #FFA048);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 50px;
+    padding: 0.75rem 1.2rem;
+    transition: var(--transition);
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(230, 57, 70, 0.2);
+}
+
+.menu-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(230, 57, 70, 0.35);
+}
+
+/* ==========================================================================
+   Footer & Contact Styling
+   ========================================================================== */
+#contact {
+    position: relative;
+    background-color: var(--footer-bg);
+}
+
+.footer {
+    background-color: var(--footer-bg);
+    color: #E2E8F0;
+    padding: 6rem 2rem 2.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr 0.8fr 1.2fr;
+    gap: 3.5rem;
+    margin-bottom: 4rem;
+}
+
+.footer-col h4 {
+    color: var(--white);
+    font-size: 1.2rem;
+    margin-bottom: 1.8rem;
+    position: relative;
+    padding-bottom: 0.6rem;
+    letter-spacing: 0.5px;
+}
+
+.footer-col h4::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background-color: var(--primary);
+    border-radius: 2px;
+}
+
+.footer-col p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--footer-text);
+}
+
+.footer-col .footer-desc {
+    margin-bottom: 1.5rem;
+}
+
+.footer-col ul {
+    list-style: none;
+}
+
+.footer-col ul li {
+    margin-bottom: 0.9rem;
+}
+
+.footer-col ul li a {
+    color: var(--footer-text);
+    text-decoration: none;
+    font-size: 0.95rem;
+    display: inline-block;
+}
+
+.footer-col ul li a:hover {
+    color: var(--primary);
+    transform: translateX(5px);
+}
+
+.footer-col .contact-info li {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: var(--footer-text);
+    font-size: 0.95rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    color: var(--white);
+    text-decoration: none;
+    transition: var(--transition);
+    font-size: 1rem;
+}
+
+.social-link:hover {
+    background-color: var(--primary);
+    color: var(--white);
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(230, 57, 70, 0.4);
+}
+
+/* Footer newsletter signup form */
+.newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 1.2rem;
+}
+
+.newsletter-input {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    padding: 0.75rem 1.2rem;
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    outline: none;
+    transition: var(--transition);
+}
+
+.newsletter-input:focus {
+    border-color: var(--primary);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.newsletter-btn {
+    background-color: var(--primary);
+    color: var(--white);
+    border: none;
+    border-radius: 50px;
+    padding: 0.75rem 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: var(--font-body);
+    transition: var(--transition);
+}
+
+.newsletter-btn:hover {
+    background-color: var(--primary-hover);
+    box-shadow: 0 4px 12px rgba(230, 57, 70, 0.3);
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: 2.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+}
+
+.footer-bottom p {
+    font-size: 0.9rem;
+    color: var(--footer-text);
+}
+
+.footer-bottom-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-bottom-links a {
+    color: var(--footer-text);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.footer-bottom-links a:hover {
+    color: var(--primary);
+}
+
+/* ==========================================================================
+   Media Queries & Responsiveness
+   ========================================================================== */
+
+/* Large screens and Desktops (disable fixed backgrounds on mobile/tablets) */
+@media (max-width: 1024px) {
+    .hero-section, .service-bg {
+        background-attachment: scroll;
+    }
+}
+
+/* Tablets (landscape and portrait) */
+@media (max-width: 992px) {
+    .grid-about-container {
+        grid-template-columns: 1fr;
+        gap: 3.5rem;
+    }
+
+    .flavor-img {
+        height: 420px;
+    }
+
+    .service-grid-container {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .service-2 {
+        height: 380px;
+        order: -1; /* Puts image at the top of stack */
+    }
+
+    .menu-parent {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.8rem;
+    }
+
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+    }
+}
+
+/* Small tablets & Mobile devices */
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: block;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 290px;
+        background: var(--white);
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.08);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transition: var(--transition);
+        z-index: 1005;
+        padding: 2rem;
+    }
+
+    .nav-menu.active {
+        right: 0;
+    }
+
+    .nav-cta-item {
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-cta {
+        width: 80%;
+        text-align: center;
+    }
+
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        max-width: 320px;
+    }
+
+    .menu-parent {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Extra small mobile screens */
+@media (max-width: 576px) {
+    .nav-container {
+        padding: 1rem 1.5rem;
+    }
+    
+    .hero-section {
+        padding-top: 7rem;
+    }
+
+    .menu-parent {
+        grid-template-columns: 1fr;
+        max-width: 350px;
+        margin: 0 auto;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 2.2rem;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 1.5rem;
+    }
+
+    .footer-bottom-links {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem 1.5rem;
+    }
+}
+        </style>
 </head>
 
 <body>
 
     <!-- navbar -->
     <nav class="navbar">
-        
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">Flavor<span>Verse</span></a>
+            
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation">
+                <span class="hamburger"></span>
+            </button>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#menu" class="nav-link">Menu</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li class="nav-cta-item"><a href="#menu" class="nav-cta">Order Online</a></li>
+            </ul>
+        </div>
     </nav>
-    <!-- Hero-sectiom -->
-    <header id="home">
 
+    <!-- Hero-section -->
+    <header id="home">
         <section class="hero-section">
             <h1 class="hero-text">Every Bite <span class="hero-second-text">Becomes a Memory</span></h1>
-            <p class="hero-para para-1"><i>Powered by Flavor. Fueled by Vibes</i> </p>
-            <p class="hero-para">Discover handcrafted meals made with fresh ingredients and unforgettable flavors. Every
-                bite is a journey.</p>
+            <p class="hero-para para-1">Powered by Flavor. Fueled by Vibes</p>
+            <p class="hero-para">Discover handcrafted meals made with fresh ingredients and unforgettable flavors. Every bite is a journey.</p>
             <div class="btn-container">
-                <button class="btn btn-primary">Explore Menu</button>
-                <button class="btn btn-secondary">Order Now</button>
+                <button class="btn btn-primary" onclick="document.getElementById('menu').scrollIntoView();">Explore Menu</button>
+                <button class="btn btn-secondary" onclick="document.getElementById('contact').scrollIntoView();">Order Now</button>
             </div>
             <div class="grid-container">
                 <div class="grid-item">
@@ -32,11 +988,11 @@
                     <p>Rating</p>
                 </div>
                 <div class="grid-item">
-                    <p>10K+😊</p>
-                    <p>Happy Customers</p>
+                    <p>10K+ 😊</p>
+                    <p>Customers</p>
                 </div>
                 <div class="grid-item">
-                    <p>100+🍥</p>
+                    <p>100+ 🍥</p>
                     <p>Dishes</p>
                 </div>
                 <div class="grid-item">
@@ -45,10 +1001,356 @@
                 </div>
             </div>
         </section>
-
     </header>
 
+    <!-- About section -->
+    <section id="about">
+        <div class="grid-about-container">
+            <img src="image/flavor.jpg" alt="flavors of FlavorVerse" class="flavor-img" loading="lazy">
+            <div class="container-2">
+                <h2 class="about-heading">About Flavor<span class="hero-second-text">Verse</span></h2>
+                <p class="about-para">Welcome to FlavorVerse, where every meal is crafted to satisfy your cravings and create unforgettable dining experiences. We believe that great food brings people together, and our mission is to serve delicious dishes made with fresh ingredients, authentic flavors, and a passion for quality.</p>
+                <p class="about-para">Whether you're craving a cheesy pizza, a juicy burger, flavorful biryani, sizzling grilled chicken, fresh seafood, creamy pasta, crunchy salads, refreshing beverages, or irresistible desserts, FlavorVerse has something for every food lover.</p>
+                <p class="about-para">Our menu combines classic favorites with modern culinary creations, ensuring every bite is packed with taste and freshness. From quick snacks to hearty meals, we're committed to delivering exceptional flavor, outstanding service, and a warm dining experience.</p>
+                <p class="about-para">At FlavorVerse, food is more than just a meal &mdash; it's a journey of flavors waiting to be explored.</p>
+            </div>
+        </div>
+    </section>
 
+    <!-- Services section -->
+    <section id="services" class="service-bg">
+        <div class="service-grid-container">
+            <div class="service-1">
+                <h2 class="service-heading">Healthy Diet Meals</h2>
+                <p class="service-para">Fuel your body with fresh, nutritious, and perfectly balanced meals. Our healthy diet options are prepared using premium ingredients, rich in protein, vitamins, and essential nutrients to support your fitness and wellness goals.</p>
+            </div>
+
+            <img src="image/diet.jpg" alt="diet healthy choices" class="service-2" loading="lazy">
+
+            <div class="service-3">
+                <h2 class="service-heading">Fresh & Balanced Nutrition</h2>
+                <p class="service-para">Enjoy wholesome meals designed to keep you energized throughout the day. From fresh salads and grilled chicken to protein bowls and nutritious smoothies, every dish is crafted for a healthy lifestyle without compromising on taste.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu section -->
+    <section id="menu">
+        <header class="menu-header">
+            <h2 class="menu-heading">Menu Card</h2>
+            <p class="menu-para">Discover our delicious offerings, crafted with passion and served with love.</p>
+        </header>
+        
+        <div class="menu-parent">
+            <!-- item-1 -->
+            <article class="menu-child">
+                <span class="menu-category-tag">Biryani</span>
+                <div class="menu-image-container">
+                    <img src="image/briyani/chicken briyani.jpg" alt="Signature Chicken Biryani" loading="lazy">
+                </div>
+                <div class="menu-content">
+                    <div class="menu-meta">
+                        <span class="menu-rating">★ 4.9</span>
+                        <span class="menu-price">$14.99</span>
+                    </div>
+                    <h3>Signature Biryani</h3>
+                    <p>Aromatic, long-grain basmati rice cooked with tender spiced chicken, saffron, and fresh herbs.</p>
+                    <div class="menu-footer">
+                        <button class="menu-btn">Order Now</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- item-2 -->
+            <article class="menu-child">
+                <span class="menu-category-tag">Pizza</span>
+                <div class="menu-image-container">
+                    <img src="image/quick-bites/pizza.jpg" alt="Cheesy Supreme Pizza" loading="lazy">
+                </div>
+                <div class="menu-content">
+                    <div class="menu-meta">
+                        <span class="menu-rating">★ 4.8</span>
+                        <span class="menu-price">$16.99</span>
+                    </div>
+                    <h3>Cheesy Supreme Pizza</h3>
+                    <p>Crispy stone-baked crust loaded with premium mozzarella cheese, savory pepperoni, and house marinara.</p>
+                    <div class="menu-footer">
+                        <button class="menu-btn">Order Now</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- item-3 -->
+            <article class="menu-child">
+                <span class="menu-category-tag">Burger</span>
+                <div class="menu-image-container">
+                    <img src="image/quick-bites/burger.jpg" alt="Gourmet Double Burger" loading="lazy">
+                </div>
+                <div class="menu-content">
+                    <div class="menu-meta">
+                        <span class="menu-rating">★ 4.7</span>
+                        <span class="menu-price">$11.99</span>
+                    </div>
+                    <h3>Gourmet Burger</h3>
+                    <p>Juicy double beef patties layered with cheddar cheese, lettuce, fresh tomato, and secret house sauce.</p>
+                    <div class="menu-footer">
+                        <button class="menu-btn">Order Now</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- item-4 -->
+            <article class="menu-child">
+                <span class="menu-category-tag">Grill</span>
+                <div class="menu-image-container">
+                    <img src="image/chicken-spl/grill.jpg" alt="Tandoori Grilled Chicken" loading="lazy">
+                </div>
+                <div class="menu-content">
+                    <div class="menu-meta">
+                        <span class="menu-rating">★ 4.8</span>
+                        <span class="menu-price">$15.99</span>
+                    </div>
+                    <h3>Tandoori Grill</h3>
+                    <p>Half chicken marinated in rich yogurt and traditional tandoori spices, flame-grilled to perfection.</p>
+                    <div class="menu-footer">
+                        <button class="menu-btn">Order Now</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- item-5 -->
+            <article class="menu-child">
+                <span class="menu-category-tag">Seafood</span>
+                <div class="menu-image-container">
+                    <img src="image/sea-food/fish finger.jpg" alt="Golden Fish Fingers" loading="lazy">
+                </div>
+                <div class="menu-content">
+                    <div class="menu-meta">
+                        <span class="menu-rating">★ 4.6</span>
+                        <span class="menu-price">$9.99</span>
+                    </div>
+                    <h3>Fish Fingers</h3>
+                    <p>Crispy breaded white fish strips fried golden brown, served with tartar sauce and fresh lemon.</p>
+                    <div class="menu-footer">
+                        <button class="menu-btn">Order Now</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- item-6 -->
+            <article class="menu-child">
+                <span class="menu-category-tag">Seafood</span>
+                <div class="menu-image-container">
+                    <img src="image/sea-food/prawn fry.jpg" alt="Spicy Prawn Fry" loading="lazy">
+                </div>
+                <div class="menu-content">
+                    <div class="menu-meta">
+                        <span class="menu-rating">★ 4.9</span>
+                        <span class="menu-price">$17.99</span>
+                    </div>
+                    <h3>Spicy Prawn Fry</h3>
+                    <p>Plump prawns marinated in local spices and stir-fried with curry leaves, onions, and black pepper.</p>
+                    <div class="menu-footer">
+                        <button class="menu-btn">Order Now</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- item-7 -->
+            <article class="menu-child">
+                <span class="menu-category-tag">Chicken</span>
+                <div class="menu-image-container">
+                    <img src="image/chicken-spl/pepper chicken.jpg" alt="Sizzling Pepper Chicken" loading="lazy">
+                </div>
+                <div class="menu-content">
+                    <div class="menu-meta">
+                        <span class="menu-rating">★ 4.7</span>
+                        <span class="menu-price">$13.99</span>
+                    </div>
+                    <h3>Pepper Chicken</h3>
+                    <p>Tender chicken pieces tossed with bell peppers, green chilies, onions, and a fiery black pepper glaze.</p>
+                    <div class="menu-footer">
+                        <button class="menu-btn">Order Now</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- item-8 -->
+            <article class="menu-child">
+                <span class="menu-category-tag">Dessert</span>
+                <div class="menu-image-container">
+                    <img src="image/Dessert Delights/brownie.jpg" alt="Chocolate Brownie" loading="lazy">
+                </div>
+                <div class="menu-content">
+                    <div class="menu-meta">
+                        <span class="menu-rating">★ 4.9</span>
+                        <span class="menu-price">$6.99</span>
+                    </div>
+                    <h3>Fudge Brownie</h3>
+                    <p>Warm, rich chocolate brownie topped with chocolate drizzle, perfect with vanilla ice cream.</p>
+                    <div class="menu-footer">
+                        <button class="menu-btn">Order Now</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- item-9 -->
+            <article class="menu-child">
+                <span class="menu-category-tag">Drinks</span>
+                <div class="menu-image-container">
+                    <img src="image/Refreshing Drinks/mojito.jpg" alt="Fresh Mint Mojito" loading="lazy">
+                </div>
+                <div class="menu-content">
+                    <div class="menu-meta">
+                        <span class="menu-rating">★ 4.5</span>
+                        <span class="menu-price">$5.99</span>
+                    </div>
+                    <h3>Mint Mojito</h3>
+                    <p>A refreshing blend of fresh mint leaves, lime juice, brown sugar, bubbly soda, and crushed ice.</p>
+                    <div class="menu-footer">
+                        <button class="menu-btn">Order Now</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- item-10 -->
+            <article class="menu-child">
+                <span class="menu-category-tag">Drinks</span>
+                <div class="menu-image-container">
+                    <img src="image/Refreshing Drinks/milkshake.jpg" alt="Rich Mango Milkshake" loading="lazy">
+                </div>
+                <div class="menu-content">
+                    <div class="menu-meta">
+                        <span class="menu-rating">★ 4.7</span>
+                        <span class="menu-price">$6.49</span>
+                    </div>
+                    <h3>Mango Milkshake</h3>
+                    <p>Creamy, thick milkshake blended with sweet Alphonso mango pulp and topped with pistachios.</p>
+                    <div class="menu-footer">
+                        <button class="menu-btn">Order Now</button>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Footer & Contact section -->
+    <footer id="contact" class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <a href="#home" class="nav-logo" style="display: inline-block; margin-bottom: 1.5rem;">Flavor<span>Verse</span></a>
+                <p class="footer-desc">Crafting culinary memories since 2018. Explore a universe of handcrafted flavors made from fresh local ingredients.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link" aria-label="Facebook">
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Instagram">
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0 3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Twitter">
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                    </a>
+                    <a href="#" class="social-link" aria-label="YouTube">
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.163c-.272-1.015-1.074-1.819-2.089-2.092-1.848-.495-9.409-.495-9.409-.495s-7.561 0-9.41.495c-1.015.273-1.817 1.077-2.09 2.092-.495 1.848-.495 5.707-.495 5.707s0 3.859.495 5.708c.273 1.015 1.075 1.817 2.09 2.09 1.849.495 9.41.495 9.41.495s7.561 0 9.41-.495c1.015-.273 1.817-1.075 2.089-2.09.495-1.849.495-5.708.495-5.708s0-3.859-.495-5.707zm-14.165 9.493v-8l6.965 4-6.965 4z"/></svg>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Our Services</a></li>
+                    <li><a href="#menu">Menu Card</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Hours</h4>
+                <ul>
+                    <li style="font-size:0.95rem; color:var(--footer-text); margin-bottom: 0.8rem;">Mon - Thu: 11:00 AM - 10:00 PM</li>
+                    <li style="font-size:0.95rem; color:var(--footer-text); margin-bottom: 0.8rem;">Fri - Sat: 11:00 AM - 11:00 PM</li>
+                    <li style="font-size:0.95rem; color:var(--footer-text); margin-bottom: 0.8rem;">Sunday: 12:00 PM - 9:00 PM</li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Newsletter</h4>
+                <p>Subscribe to get updates on seasonal dishes, discounts, and culinary events.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+                    <input type="email" placeholder="Your Email Address" class="newsletter-input" required aria-label="Email address for newsletter">
+                    <button type="submit" class="newsletter-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 FlavorVerse. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Navigation Scripts -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Mobile menu toggle logic
+            const navToggle = document.getElementById("navToggle");
+            const navMenu = document.getElementById("navMenu");
+            const navLinks = document.querySelectorAll(".nav-link");
+
+            if (navToggle && navMenu) {
+                navToggle.addEventListener("click", () => {
+                    navToggle.classList.toggle("active");
+                    navMenu.classList.toggle("active");
+                });
+            }
+
+            // Close menu when a link is clicked
+            navLinks.forEach(link => {
+                link.addEventListener("click", () => {
+                    if (navToggle && navMenu) {
+                        navToggle.classList.remove("active");
+                        navMenu.classList.remove("active");
+                    }
+                });
+            });
+
+            // Add shadow class to navbar on scroll & active link state
+            const navbar = document.querySelector(".navbar");
+            const sections = document.querySelectorAll("section, header");
+
+            window.addEventListener("scroll", () => {
+                // Navbar background transition on scroll
+                if (window.scrollY > 50) {
+                    navbar.classList.add("scrolled");
+                } else {
+                    navbar.classList.remove("scrolled");
+                }
+
+                // Scrollspy active state on menu links
+                let current = "";
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    // Trigger active link 120px before section top
+                    if (window.pageYOffset >= (sectionTop - 150)) {
+                        current = section.getAttribute("id");
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove("active");
+                    if (link.getAttribute("href") === `#${current}`) {
+                        link.classList.add("active");
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
