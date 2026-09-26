@@ -1,0 +1,157 @@
+/* media */
+
+/* medium screen */
+@media screen and (max-width:970px) {
+    nav {
+        padding: 15px 25px;
+    }
+
+    #toggler {
+        display: flex;
+    }
+
+    #nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 280px;
+        background: var(--white);
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        padding: 10px;
+        transition: all .3s ease;
+      
+    }
+
+    #nav-links.active {
+        right: 0;
+    }
+
+
+    #about {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    #about img {
+        height: 500px;
+        object-fit: cover;
+    }
+
+    .about-content {
+        height: auto;
+    }
+
+    .menu-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        padding: 10px 50px;
+    }
+}
+
+/* medium- small device */
+@media screen and (max-width:800px) {
+    .section-p1 {
+        padding: 0 40px;
+    }
+
+    #home h1 {
+        font-size: 50px;
+    }
+
+    #home h4 {
+        font-size: 27px;
+    }
+
+    .service-grid {
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+    .menu-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+/* small device */
+@media screen and (max-width:600px) {
+    .section-p1 {
+        padding: 0 50px;
+    }
+
+    #home {
+        padding: 0px 30px;
+    }
+
+    #home h1 {
+        font-size: 35px;
+        padding-top: 60px;
+    }
+
+    #home h4 {
+        font-size: 20px;
+    }
+
+    #home p {
+        font-size: 15px;
+
+    }
+
+
+    .about-content h2 {
+        font-size: 35px;
+    }
+
+    .service-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .service-heading h2 {
+        font-size: 35px;
+    }
+
+    .service-heading p {
+        font-size: 15px;
+    }
+
+    .menu-container {
+        grid-template-columns: repeat(1, 1fr);
+
+    }
+
+    .menu-heading h2 {
+        font-size: 35px;
+    }
+
+    .menu-heading p {
+        font-size: 15px;
+    }
+
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-content h3 {
+        font-size: 35px;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+    }
+
+}
