@@ -86,7 +86,7 @@
 /* small device */
 @media screen and (max-width:600px) {
     .section-p1 {
-        padding: 0 50px;
+        padding: 0 40px;
     }
 
     #home {
@@ -94,16 +94,16 @@
     }
 
     #home h1 {
-        font-size: 35px;
+        font-size: 30px;
         padding-top: 60px;
     }
 
     #home h4 {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     #home p {
-        font-size: 15px;
+        font-size: 12px;
 
     }
 
@@ -152,6 +152,15 @@
 
     .footer-bottom {
         flex-direction: column;
+    }
+    .footer{
+        padding: 10px;
+    }
+    .btn-container{
+       
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
 }
