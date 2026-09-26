@@ -755,6 +755,7 @@ nav h1 span {
     padding: 12px 20px;
     font-size: 15px;
     outline: none;
+    color: var(--white);
 }
 
 #newsletter-form:focus {
