@@ -25,7 +25,7 @@
         gap: 40px;
         padding: 10px;
         transition: all .3s ease;
-      
+
     }
 
     #nav-links.active {
@@ -94,17 +94,28 @@
     }
 
     #home h1 {
-        font-size: 30px;
+        font-size: 37px;
         padding-top: 60px;
     }
 
     #home h4 {
-        font-size: 18px;
+        font-size: 20px;
     }
 
     #home p {
-        font-size: 12px;
+        font-size: 15px;
 
+    }
+
+    .btn-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+    }
+    .btn-container a button{
+        padding: 8px 18px;
+        font-size: ;
     }
 
 
@@ -153,14 +164,27 @@
     .footer-bottom {
         flex-direction: column;
     }
-    .footer{
+
+    .footer {
         padding: 10px;
     }
-    .btn-container{
-       
-        display: flex;
-        justify-content: center;
-        align-items: center;
+
+
+}
+
+@media screen and (max-width:450px) {
+    #home h1 {
+        font-size: 28px;
     }
+
+    #home h4 {
+        font-size: 17px;
+    }
+
+    #home p {
+        font-size: 12px;
+
+    }
+
 
 }
