@@ -533,6 +533,20 @@
                 navLinks.classList.remove("active");
             });
         });
+
+        // news letter form
+
+        const form = document.querySelector(".newsletter");
+
+        form.addEventListener("submit", (event)=>{
+            event.preventDefault();
+             alert("Subscribed successfully!");
+             form.reset()
+           
+        });
+
+       
+        
     </script>
 
 </body>
